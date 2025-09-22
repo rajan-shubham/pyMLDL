@@ -1,0 +1,66 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+develop-eggs/
+*.manifest
+*.spec
+pip-wheel-metadata/
+*.log
+
+# --- Virtual Environments ---
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Jupyter Notebook ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+# Autosave & temporary notebooks
+*.autosave.ipynb
+Untitled*.ipynb
+# nbconvert, nbcache, other temp outputs
+.nbconvert/
+.nbcache/
+# Kernel and runtime files
+kernel-*.json
+.ipython/
+.jupyter/
+
+# --- PyTorch / Numpy / Data files ---
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.npy
+*.h5
+*.pkl
+*.pickle
+
+# --- MacOS specific ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Others you may generate ---
+*.tmp
+*.bak
