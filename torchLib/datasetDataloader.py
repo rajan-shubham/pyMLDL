@@ -1,3 +1,16 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import torch
+from torch.utils.data import Dataset, DataLoader
+import torch.nn as nn
+import torch.optim as optim
+
+# set random seed for reproducibility
+torch.manual_seed(42)
+
+# read the csv file
+df = pd.read_csv('fmnist_small.csv') # using right now 6k images from full dataset
+print(df.head())
 
 # train test split
 x = df.iloc[:, 1:]
@@ -62,3 +75,71 @@ criterion = nn.CrossEntropyLoss()
 
 # define optimizer
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+
+# training loop
+for epoch in range(epochs):
+    total_epoch_loss = 0
+    for batch_features, batch_labels in train_loader:
+        # zero the parameter gradients
+        optimizer.zero_grad()
+        # forward pass
+        outputs = model(batch_features)
+        # calculate loss
+        loss = criterion(outputs, batch_labels)
+        # backward pass
+        loss.backward()
+        # update weights/grads
+        optimizer.step()
+
+        # calculate total epoch loss
+        total_epoch_loss += loss.item()
+    
+    # print epoch loss
+    # har epochs me per batch me jitna loss aaya usko average karke print
+    print(f"Epoch {epoch+1}, Loss: {total_epoch_loss/len(train_loader)}")
+
+
+
+# set model to evaluation mode
+model.eval()
+
+# initialize variables to keep track of correct predictions and total predictions
+correct = 0
+total = 0
+
+# disable gradient calculation
+with torch.no_grad():
+    for batch_features, batch_labels in test_loader:
+        # forward pass
+        outputs = model(batch_features)
+        # get predicted class
+        _, predicted = torch.max(outputs.data, 1)
+        # update correct and total
+        total += batch_labels.size(0)
+        correct += (predicted == batch_labels).sum().item()
+
+# print accuracy
+print(f"Accuracy of the network on the 10000 test images: {100 * correct // total} %")
+
+
+"""
+to maximize the acuaracy
+1. use full dataset
+2. use more epochs
+3. use more hidden layers
+4. use more neurons in hidden layers
+5. use different optimizer
+6. use different learning rate
+7. use different batch size
+8. use different activation function
+9. use different loss function
+10. use different weight initialization techniques
+
+change in model architecture by 
+1. adding dropout layer
+2. adding batch normalization layer
+3. adding residual connections
+4. adding skip connections
+5. adding attention mechanism
+6. hyperparameter tuning
+"""
