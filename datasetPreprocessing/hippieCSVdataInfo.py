@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Load the generated CSV file
-file_path = '/Users/rajan/github/hippie_protein_interactions.csv'
+file_path = '/Users/rajan/github/pythonMLDL/datasetPreprocessing/hippie_protein_interactions.csv'
 df = pd.read_csv(file_path)
 
 print("="*70)
